@@ -1,0 +1,107 @@
+.heading{
+  font-size: 70px;
+  color: rgb(62, 62, 168);
+  text-align: center;
+}
+
+.box{
+  width: 700px;
+  height: 700px;
+  padding: 40px;
+  margin: auto;
+  
+}
+
+.flex-btn{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn{
+  padding: 20px 30px;
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  background: rgb(62, 62, 168);
+}
+
+.category-btn{
+  padding: 10px;
+  width: 200px;
+  border-radius: 10px;
+  background: rgb(235, 229, 229);
+  
+  font-weight: bold;
+  border: none;
+  font-size: 20px;
+}
+
+.category-btn:focus{
+  outline: none;
+}
+
+.tasks{
+  
+  width: 100%;
+  border-radius: 10px;
+  background: rgb(226, 223, 230);
+  height: 400px;
+  margin-top: 40px;
+  padding: 10px;
+}
+
+.task{
+  width: 680px;
+  padding: 10px;
+  border-radius: 10px;
+  min-height: 40px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  
+}
+
+.text{
+  font-size: 30px;
+  font-weight: 400;
+  
+}
+
+.delete{
+  padding: 5px;
+  border-radius: 5px;
+  background: rgb(226, 223, 230);
+  cursor: pointer;
+}
+
+.delete img{
+  width: 20px;
+}
+
+.update{
+  padding: 5px;
+  border-radius: 5px;
+  background: rgb(226, 223, 230);
+  cursor: pointer;
+}
+
+.update img{
+  width: 20px;
+}
+
+.flexClass{
+  display: flex;
+  gap: 20px;
+}
+
+.customInput{
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 10px;
+}
