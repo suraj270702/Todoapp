@@ -66,6 +66,21 @@
   
 }
 
+.done{
+  
+    width: 680px;
+    padding: 10px;
+    border-radius: 10px;
+    min-height: 40px;
+    background-color: rgb(211, 245, 211);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    
+  
+}
+
 .text{
   font-size: 30px;
   font-weight: 400;

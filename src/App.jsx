@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import deleteImg from './—Pngtree—delete icon_4420857.png'
-import update from './kisspng-computer-icons-editing-pencil-icon-5ae26c0192f387.2948761415247882256019.png'
+import updateImg from './kisspng-computer-icons-editing-pencil-icon-5ae26c0192f387.2948761415247882256019.png'
 import { v4 } from 'uuid'
 function App() {
   const [taskInput,setTaskInput] = useState('')
@@ -12,6 +12,8 @@ function App() {
     []
   )
   const [update,setUpdate] = useState(false)
+  const [optionValue,setOptionValue] = useState('all')
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
   const add =(task)=>{
     const taskData = {
@@ -47,7 +49,7 @@ function App() {
     });
   
     setTask(updatedTasks);
-    setUpdate(false)
+    setUpdate(!update)
     setTaskId(null)
     setTaskInput('')
   };
@@ -58,9 +60,37 @@ function App() {
     setTaskId(id)
   }
 
+  const updateComplete =(taskId)=>{
+    const updatedTasks = task.map((t,i)=>{
+      if(t.id === taskId){
+       return {...t,complete:!t.complete}
+      }
+      return t
+  })
+  setTask(updatedTasks)
+  setUpdate(!update)
+  setTaskInput('')
+  setTaskId(null)
+  }
+
+  const filterData=()=>{
+    if(optionValue === 'all'){
+      setFilteredTasks(task)
+    }
+    else if(optionValue === 'done'){
+      const filterData = task.filter((t,i)=>t.complete === true)
+      setFilteredTasks(filterData)
+    }
+    else if(optionValue === 'pending'){
+      const filterData = task.filter((t,i)=>t.complete !== true)
+      setFilteredTasks(filterData)
+    }
+  }
+
   useEffect(()=>{
-    console.log(task)
-  },[task])
+    console.log(optionValue)
+    filterData()
+  },[task,optionValue])
 
   return (
     <>
@@ -71,19 +101,20 @@ function App() {
             <input className='customInput' type='text' value={taskInput} placeholder='add a task' onChange={(e)=>setTaskInput(e.target.value)}/>
             <div className='flex-btn'>
               <button className='btn' disabled={taskInput.length > 1 ? false : true} onClick={()=>update ? updateData(taskId,taskInput) : addTask(taskInput)}>{update ? 'Update' : 'Add Task'}</button>
-              <select className='category-btn'>
-                <option>All</option>
-                <option>Done</option>
-                <option>Pending</option>
+             {update &&  <button className='btn' onClick={()=>updateComplete(taskId)}>Done</button>}
+              <select className='category-btn' value={optionValue} onChange={(e)=>setOptionValue(e.target.value)}>
+                <option value={'all'}>All</option>
+                <option value={'done'}>Done</option>
+                <option value={'pending'}>Pending</option>
               </select>
 
 
             </div>
             <div className='tasks'>
              {
-              task.length >= 1 && (
-                task.map((t,i)=>(
-                  <div className='task' key={t.id}>
+              filteredTasks.length >= 1 && (
+                filteredTasks.map((t,i)=>(
+                  <div className={`task ${t.complete ? 'done' : ''}`} key={t.id}>
 
                   <span className='text'>{t.task}</span>
                   <div className='flexClass'>
@@ -91,8 +122,9 @@ function App() {
                       <img src={deleteImg} />
   
                     </div>
+
                     <div className='update' onClick={()=>HandleUpdate(t.task,t.id)} >
-                      <img src={update} />
+                      <img src={updateImg} />
                     </div>
                   </div>
   
